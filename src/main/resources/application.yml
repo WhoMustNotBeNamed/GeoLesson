@@ -1,0 +1,9 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://db:5432/geolesson
+        username: geolesson_user
+        password: geolesson_user
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        hibernate:
+            ddl-auto: create
