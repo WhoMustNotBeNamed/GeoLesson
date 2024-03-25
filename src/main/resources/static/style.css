@@ -1,3 +1,7 @@
 .bg-light-olive {
     background-color: rgba(146, 196, 115, .85);
 }
+
+.navbar-nav .nav-link {
+    font-size: 20px; /* Устанавливаем размер шрифта 18 пикселей */
+}

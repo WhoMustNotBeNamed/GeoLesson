@@ -1,4 +1,4 @@
-package ru.hse.coursework.geolesson.service.impl;
+package ru.hse.coursework.geolesson.service.impl.user;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

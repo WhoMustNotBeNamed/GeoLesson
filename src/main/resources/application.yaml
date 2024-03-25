@@ -7,6 +7,10 @@ spring:
     jpa:
         hibernate:
             ddl-auto: create
+
 logging:
-  level:
-    com.zaxxer.hikari: DEBUG
+    level:
+        org:
+            springframework:
+                security: DEBUG
+                web: DEBUG

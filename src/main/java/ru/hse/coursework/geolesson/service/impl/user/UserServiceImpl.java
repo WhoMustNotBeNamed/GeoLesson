@@ -1,4 +1,4 @@
-package ru.hse.coursework.geolesson.service.impl;
+package ru.hse.coursework.geolesson.service.impl.user;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -12,10 +12,7 @@ import ru.hse.coursework.geolesson.repository.UserRepository;
 import ru.hse.coursework.geolesson.service.UserService;
 import ru.hse.coursework.geolesson.config.AccountDetails;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -25,10 +22,14 @@ public class UserServiceImpl implements UserService{
     private PasswordEncoder passwordEncoder;
 
     @Override
-    @Transactional
     public void addUser(Account user) {
         if (userRepository.findUserByUsername(user.getUsername()).isPresent()) {
             throw new IllegalArgumentException("User with this login already exists");
+        }
+        if (Objects.equals(user.getUsername(), "admin")) {
+            user.setRoles("ROLE_ADMIN");
+        } else {
+            user.setRoles("ROLE_USER");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
@@ -36,6 +37,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void deleteUserByUsername(String username) {
+        if (userRepository.findUserByUsername(username).isEmpty()) {
+            throw new IllegalArgumentException("User with this login does not exist");
+        }
         userRepository.deleteUserByUsername(username);
     }
 
