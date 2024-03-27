@@ -42,6 +42,13 @@ public class CountryController {
         return new ModelAndView("addCountryPage");
     }
 
+    @GetMapping("/country/{name}")
+    public ModelAndView getCountryInfoByName(@PathVariable String name, Model model) {
+        model.addAttribute("country", countryService.getCountryByName(name));
+        return new ModelAndView("countryPage");
+    }
+
+
 
 
     @PostMapping("/mountain/add/{countryName}")
