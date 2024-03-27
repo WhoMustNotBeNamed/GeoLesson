@@ -25,8 +25,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/static/**", "/users/**", "/add", "/countries/**", "/countries/add", "/testInfo/**").permitAll()
-                .anyRequest().permitAll())
+                .requestMatchers("/", "/static/**", "/users/**", "/add", "/countries/**", "/countries/add", "/testInfo/**", "/infoPage/**").permitAll()
+                .anyRequest().permitAll()
+                )
                 .formLogin(form -> form
                         .loginPage("/signUp")
                         .failureHandler((request, response, exception) -> {

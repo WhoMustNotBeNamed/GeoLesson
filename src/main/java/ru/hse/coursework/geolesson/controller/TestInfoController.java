@@ -2,9 +2,8 @@ package ru.hse.coursework.geolesson.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.hse.coursework.geolesson.model.Account;
+import org.springframework.web.servlet.ModelAndView;
 import ru.hse.coursework.geolesson.model.TestInfo;
-import ru.hse.coursework.geolesson.model.TestResult;
 import ru.hse.coursework.geolesson.service.TestInfoService;
 import ru.hse.coursework.geolesson.service.UserService;
 
@@ -29,16 +28,13 @@ public class TestInfoController {
     }
 
     @PostMapping("/add")
-    public String addTestInfo(@RequestBody TestInfo testInfo) {
+    public ModelAndView addTestInfo(@ModelAttribute TestInfo testInfo) {
         testInfoService.addTestInfo(testInfo);
-        return "testInfo added";
+        return new ModelAndView("redirect:/testPage");
     }
 
-    @PostMapping("/updateResult/{accountId}/{testInfoId}")
-    public String updateResult(@PathVariable UUID accountId,
-                               @PathVariable UUID testInfoId,
-                               @RequestParam double newResult) {
-        testInfoService.updateResult(accountId, testInfoId, newResult);
-        return "result updated";
+    @GetMapping("/addTest")
+    public ModelAndView addTest() {
+        return new ModelAndView("addTestPage");
     }
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.hse.coursework.geolesson.model.*;
 import ru.hse.coursework.geolesson.repository.MountainRepository;
 import ru.hse.coursework.geolesson.service.*;
@@ -30,17 +31,16 @@ public class CountryController {
 //        return countryService.getCountryByName(name);
 //    }
 
-    @PostMapping("/add")
-    public String addCountry(@RequestBody Country country) {
+    @PostMapping("/addCountry")
+    public ModelAndView addCountry(@ModelAttribute Country country, Model model) {
         countryService.addCountry(country);
-        return "country added";
+        return new ModelAndView("redirect:/infoPage");
     }
 
-//    @PostMapping("/addInfo")
-//    public String addCountryInfo(@RequestBody CountryInfo countryInfo) {
-//        countryInfoService.addCountryInfo(countryInfo);
-//        return "country info added";
-//    }
+    @GetMapping("/addInfo")
+    public ModelAndView addCountryInfo() {
+        return new ModelAndView("addCountryPage");
+    }
 
 
 

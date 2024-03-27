@@ -3,13 +3,15 @@ package ru.hse.coursework.geolesson.controller;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.hse.coursework.geolesson.model.Account;
 import ru.hse.coursework.geolesson.service.UserService;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("users")
 @AllArgsConstructor
 @Slf4j
@@ -22,14 +24,16 @@ public class UserController {
     }
 
     @PostMapping("/signUp")
-    public String addUser(@ModelAttribute Account user) {
+    public ModelAndView addUser(@ModelAttribute Account user, Model model) {
         user.setRoles("ROLE_USER");
         userService.addUser(user);
-        return "index";
+        //model.addAttribute("user", new Account());
+        return new ModelAndView("redirect:/mainPage");
     }
 
     @GetMapping("/registration")
-    public String showRegistrationForm() {
-        return "signUp";
+    public ModelAndView showRegistrationForm(Model model) {
+        model.addAttribute("user", new Account());
+        return new ModelAndView("signUp");
     }
 }

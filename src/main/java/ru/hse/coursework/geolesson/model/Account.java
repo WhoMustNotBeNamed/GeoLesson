@@ -21,7 +21,4 @@ public class Account {
     private String username;
     private String password;
     private String roles;
-
-    @OneToMany(mappedBy = "account")
-    private List<TestResult> testResults;
 }

@@ -14,9 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class AppController {
     private final CountryService countryService;
 
-//    @GetMapping("/")
-//    public ModelAndView countriesInfo(Model model) {
+//    @GetMapping("/info")
+//    public ModelAndView infoPage(Model model) {
 //        model.addAttribute("countries", countryService.getAllCountries());
-//        return new ModelAndView("countriesInfo");
+//        return new ModelAndView("infoPage");
 //    }
+
+    @GetMapping("/error")
+    public ModelAndView showErrorForm(String message) {
+        ModelAndView model = new ModelAndView("error");
+        model.addObject("message", message);
+        return model;
+    }
 }

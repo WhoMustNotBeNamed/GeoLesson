@@ -16,7 +16,4 @@ public class TestInfo {
     private String description;
     private int numberOfQuestions;
     private int complexity;
-
-    @OneToMany(mappedBy = "testInfo")
-    private List<TestResult> testResults;
 }
