@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import ru.hse.coursework.geolesson.model.Account;
 import ru.hse.coursework.geolesson.repository.UserRepository;
 import ru.hse.coursework.geolesson.service.UserService;
-import ru.hse.coursework.geolesson.config.AccountDetails;
+
 
 import java.util.*;
 

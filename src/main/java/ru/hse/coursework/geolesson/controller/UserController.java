@@ -23,12 +23,18 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/login")
+    public ModelAndView login(Model model) {
+        model.addAttribute("user", new Account());
+        return new ModelAndView("login");
+    }
+
     @PostMapping("/signUp")
     public ModelAndView addUser(@ModelAttribute Account user, Model model) {
         user.setRoles("ROLE_USER");
         userService.addUser(user);
         //model.addAttribute("user", new Account());
-        return new ModelAndView("redirect:/mainPage");
+        return new ModelAndView("redirect:/users/login");
     }
 
     @GetMapping("/registration")

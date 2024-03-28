@@ -15,10 +15,10 @@
 <div class="container mt-5">
     <h2 class="text-center">Профиль</h2>
     <div class="card-body">
-        <p>Логин:
-        <div sec:authorize="isAuthenticated()">
-            <span sec:authentication="${user.getName()}"></span></div></p>
-        <p>Пароль: <span th:text="${user.getName()}"></span></p>
+        <p>Логин:</p>
+<!--        <div sec:authorize="isAuthenticated()">-->
+<!--            <span sec:authentication="${user.getName()}"></span></div></p>-->
+<!--        <p>Пароль: <span th:text="${user.getName()}"></span></p>-->
     </div>
 </div>
 </body>

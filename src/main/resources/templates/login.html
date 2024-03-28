@@ -17,20 +17,24 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-light-olive">
-                    <h3 class="text-center">Регистрация</h3>
+                    <h3 class="text-center">Вход</h3>
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/users/signUp}" method="post" th:object="${user}">
+                    <form th:action="@{/users/login}" method="post" th:object="${account}">
                         <div class="mb-3">
                             <label for="username" class="form-label">Логин</label>
-                            <input type="text" class="form-control" id="username" name="username" th:field="*{username}" required>
+                            <input type="text" class="form-control" id="username" name="username" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Пароль</label>
-                            <input type="password" class="form-control"  id="password" name="password" th:field="*{password}" required>
+                            <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                        <button type="submit" class="btn btn-primary">Войти</button>
                     </form>
+
+                    <div class="mt-3 text-center">
+                        <a href="users/registration" class="btn btn-secondary">Создать аккаунт</a>
+                    </div>
                 </div>
             </div>
         </div>

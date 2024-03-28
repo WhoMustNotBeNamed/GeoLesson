@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,19 +24,24 @@ import ru.hse.coursework.geolesson.service.impl.user.NewUserDetailsService;
 public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf(AbstractHttpConfigurer::disable)
+        httpSecurity/*.csrf(AbstractHttpConfigurer::disable)*/
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/static/**", "/users/**", "/add", "/countries/**", "/countries/add", "/testInfo/**", "/infoPage/**").permitAll()
-                .anyRequest().permitAll()
+                                .requestMatchers("/profilePage").hasAnyAuthority("ROLE_ADMIN")
+                                .requestMatchers("/", "/static/**", "/users/**", "/add", "/countries/**", "/countries/add", "/testInfo/**", "/infoPage/**").permitAll()
+                                .anyRequest().permitAll()
+
                 )
                 .formLogin(form -> form
-                        .loginPage("/signUp")
+                        .loginPage("/users/login")
                         .failureHandler((request, response, exception) -> {
                             log.error("Authentication failure: ", exception);
                             response.sendRedirect("/error");
                         })
+                        .defaultSuccessUrl("/mainPage", true)
                         .permitAll()
-                );
+                )
+                .logout(LogoutConfigurer::permitAll);
+
         return httpSecurity.build();
     }
 
