@@ -1,5 +1,6 @@
 package ru.hse.coursework.geolesson.service.impl.river;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.hse.coursework.geolesson.model.Country;
@@ -36,6 +37,25 @@ public class RiverServiceImpl implements RiverService {
     }
 
     @Override
+    public void updateRiver(River river) {
+        if (river == null) {
+            throw new IllegalArgumentException("River cannot be null");
+        } else if (riverRepository.getRiverByName(river.getName()).isEmpty()) {
+            throw new IllegalArgumentException("River does not exist");
+        }
+
+        riverRepository.getRiverByName(river.getName()).ifPresent(r -> {
+            r.setLength(river.getLength());
+            r.setWidth(river.getWidth());
+            r.setRiverMouth(river.getRiverMouth());
+            r.setRiverSource(river.getRiverSource());
+            r.setUsedFor(river.getUsedFor());
+            r.setCountries(river.getCountries());
+            riverRepository.save(r);
+        });
+    }
+
+    @Override
     public River getRiverByName(String name) {
         return riverRepository.getRiverByName(name).orElse(null);
     }
@@ -46,11 +66,14 @@ public class RiverServiceImpl implements RiverService {
     }
 
     @Override
+    @Transactional
     public void deleteRiverByName(String name) {
         if (riverRepository.getRiverByName(name).isEmpty()) {
             throw new IllegalArgumentException("River does not exist");
         }
-
+        countryService.getAllCountries().forEach(country -> {
+            country.getRivers().removeIf(river -> river.getName().equals(name));
+        });
         riverRepository.deleteByName(name);
     }
 }

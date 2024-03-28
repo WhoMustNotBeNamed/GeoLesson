@@ -9,5 +9,6 @@ public interface RiverService {
     void addRiver(River river);
     River getRiverByName(String name);
     List<River> getAllRivers();
+    void updateRiver(River river);
     void deleteRiverByName(String name);
 }

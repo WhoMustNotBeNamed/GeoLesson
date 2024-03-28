@@ -1,15 +1,11 @@
 package ru.hse.coursework.geolesson.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.hse.coursework.geolesson.model.*;
-import ru.hse.coursework.geolesson.repository.MountainRepository;
 import ru.hse.coursework.geolesson.service.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/countries")
@@ -78,16 +74,45 @@ public class CountryController {
         return new ModelAndView("addMountainPage");
     }
 
-    @GetMapping("/mountain/all")
-    public List<Mountain> getAllMountains() {
-        return mountainService.getAllMountains();
+    @GetMapping("/mountain/{name}")
+    public ModelAndView getMountainInfoByName(@PathVariable String name, Model model) {
+        model.addAttribute("mountain", mountainService.getMountainByName(name));
+        return new ModelAndView("mountainInfo");
     }
 
-    @GetMapping("/country/mountains")
-    public List<Mountain> getMountainsByCountry(@RequestBody String countryName) {
-        return countryService.getCountryByName(countryName).getMountains();
+    @GetMapping("/mountains")
+    public ModelAndView getAllMountains(Model model) {
+        model.addAttribute("mountains", mountainService.getAllMountains());
+        return new ModelAndView("mountainsPage");
     }
 
+    @PostMapping("/mountain/updateMountain")
+    public ModelAndView updateMountain(@ModelAttribute Mountain mountain) {
+        mountainService.updateMountain(mountain);
+        return new ModelAndView("redirect:/infoPage");
+    }
+
+    @GetMapping("/updateMountain/{name}")
+    public ModelAndView updateMountain(@PathVariable String name, Model model) {
+        model.addAttribute("mountain", mountainService.getMountainByName(name));
+        return new ModelAndView("updateMountainPage");
+    }
+
+    @GetMapping("/deleteMountain/{name}")
+    public ModelAndView deleteMountain(@PathVariable String name) {
+        mountainService.deleteMountainByName(name);
+        return new ModelAndView("redirect:/infoPage");
+    }
+
+//    @GetMapping("/mountain/all")
+//    public List<Mountain> getAllMountains() {
+//        return mountainService.getAllMountains();
+//    }
+//
+//    @GetMapping("/country/mountains")
+//    public List<Mountain> getMountainsByCountry(@RequestBody String countryName) {
+//        return countryService.getCountryByName(countryName).getMountains();
+//    }
 
 
     @PostMapping("/river/add")
@@ -101,15 +126,45 @@ public class CountryController {
         return new ModelAndView("addRiverPage");
     }
 
-    @GetMapping("/river/all")
-    public List<River> getAllRivers() {
-        return riverService.getAllRivers();
+    @GetMapping("/river/{name}")
+    public ModelAndView getRiverInfoByName(@PathVariable String name, Model model) {
+        model.addAttribute("river", riverService.getRiverByName(name));
+        return new ModelAndView("riverInfo");
     }
 
-    @GetMapping("/country/rivers")
-    public List<River> getRiversByCountry(@RequestBody String countryName) {
-        return countryService.getCountryByName(countryName).getRivers();
+    @GetMapping("/rivers")
+    public ModelAndView getAllRivers(Model model) {
+        model.addAttribute("rivers", riverService.getAllRivers());
+        return new ModelAndView("riversPage");
     }
+
+    @PostMapping("/river/updateRiver")
+    public ModelAndView updateRiver(@ModelAttribute River river) {
+        riverService.updateRiver(river);
+        return new ModelAndView("redirect:/infoPage");
+    }
+
+    @GetMapping("/updateRiver/{name}")
+    public ModelAndView updateRiver(@PathVariable String name, Model model) {
+        model.addAttribute("river", riverService.getRiverByName(name));
+        return new ModelAndView("updateRiverPage");
+    }
+
+    @GetMapping("/deleteRiver/{name}")
+    public ModelAndView deleteRiver(@PathVariable String name) {
+        riverService.deleteRiverByName(name);
+        return new ModelAndView("redirect:/infoPage");
+    }
+
+//    @GetMapping("/river/all")
+//    public List<River> getAllRivers() {
+//        return riverService.getAllRivers();
+//    }
+//
+//    @GetMapping("/country/rivers")
+//    public List<River> getRiversByCountry(@RequestBody String countryName) {
+//        return countryService.getCountryByName(countryName).getRivers();
+//    }
 
 
 
@@ -124,14 +179,44 @@ public class CountryController {
         return new ModelAndView("addSeaPage");
     }
 
-    @GetMapping("/sea/all")
-    public List<Sea> getAllSeas() {
-        return seaService.getAllSeas();
+    @GetMapping("/sea/{name}")
+    public ModelAndView getSeaInfoByName(@PathVariable String name, Model model) {
+        model.addAttribute("sea", seaService.getSeaByName(name));
+        return new ModelAndView("seaInfo");
     }
 
-    @GetMapping("/country/seas")
-    public List<Sea> getSeasByCountry(@RequestBody String countryName) {
-        return countryService.getCountryByName(countryName).getSeas();
+    @GetMapping("/seas")
+    public ModelAndView getAllSeas(Model model) {
+        model.addAttribute("seas", seaService.getAllSeas());
+        return new ModelAndView("seasPage");
     }
+
+    @PostMapping("/sea/updateSea")
+    public ModelAndView updateSea(@ModelAttribute Sea sea) {
+        seaService.updateSea(sea);
+        return new ModelAndView("redirect:/infoPage");
+    }
+
+    @GetMapping("/updateSea/{name}")
+    public ModelAndView updateSea(@PathVariable String name, Model model) {
+        model.addAttribute("sea", seaService.getSeaByName(name));
+        return new ModelAndView("updateSeaPage");
+    }
+
+    @GetMapping("/deleteSea/{name}")
+    public ModelAndView deleteSea(@PathVariable String name) {
+        seaService.deleteSeaByName(name);
+        return new ModelAndView("redirect:/infoPage");
+    }
+
+//    @GetMapping("/sea/all")
+//    public List<Sea> getAllSeas() {
+//        return seaService.getAllSeas();
+//    }
+//
+//    @GetMapping("/country/seas")
+//    public List<Sea> getSeasByCountry(@RequestBody String countryName) {
+//        return countryService.getCountryByName(countryName).getSeas();
+//    }
 }
 
