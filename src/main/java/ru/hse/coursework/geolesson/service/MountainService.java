@@ -6,7 +6,7 @@ import ru.hse.coursework.geolesson.model.Mountain;
 import java.util.List;
 
 public interface MountainService {
-    void addMountain(Mountain mountain, Country country);
+    void addMountain(Mountain mountain);
     Mountain getMountainByName(String name);
     List<Mountain> getAllMountains();
     void deleteMountainByName(String name);

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.hse.coursework.geolesson.model.Country;
 import ru.hse.coursework.geolesson.model.Sea;
 import ru.hse.coursework.geolesson.repository.SeaRepository;
+import ru.hse.coursework.geolesson.service.CountryService;
 import ru.hse.coursework.geolesson.service.SeaService;
 
 import java.util.List;
@@ -13,15 +14,24 @@ import java.util.List;
 @AllArgsConstructor
 public class SeaServiceImpl implements SeaService {
     private SeaRepository seaRepository;
+    private CountryService countryService;
 
     @Override
-    public void addSea(Sea sea, Country country) {
+    public void addSea(Sea sea) {
         if (sea == null) {
             throw new IllegalArgumentException("Sea cannot be null");
         } else if (seaRepository.getSeaByName(sea.getName()).isPresent()) {
             throw new IllegalArgumentException("Sea already exists");
         }
-        country.getSeas().add(sea);
+        for (String countryName : sea.getCountries().split(", ")) {
+            Country country = countryService.getCountryByName(countryName);
+            if (country == null) {
+                throw new IllegalArgumentException("Country not found: " + countryName);
+            } else if (country.getSeas().contains(sea)) {
+                throw new IllegalArgumentException("Sea already exists in the country");
+            }
+            country.getSeas().add(sea);
+        }
         seaRepository.save(sea);
     }
 

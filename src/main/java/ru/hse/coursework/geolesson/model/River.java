@@ -19,4 +19,5 @@ public class River {
     private String riverMouth;
     private String riverSource;
     private String usedFor;
+    private String countries;
 }

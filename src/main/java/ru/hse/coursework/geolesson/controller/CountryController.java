@@ -51,10 +51,15 @@ public class CountryController {
 
 
 
-    @PostMapping("/mountain/add/{countryName}")
-    public String addMountain(@RequestBody Mountain mountain, @PathVariable String countryName) {
-        mountainService.addMountain(mountain, countryService.getCountryByName(countryName));
-        return "mountain added";
+    @PostMapping("/mountain/add")
+    public ModelAndView addMountain(@ModelAttribute Mountain mountain) {
+        mountainService.addMountain(mountain);
+        return new ModelAndView("redirect:/infoPage");
+    }
+
+    @GetMapping("/addMountain")
+    public ModelAndView addMountain() {
+        return new ModelAndView("addMountainPage");
     }
 
     @GetMapping("/mountain/all")
@@ -69,10 +74,15 @@ public class CountryController {
 
 
 
-    @PostMapping("/river/add/{countryName}")
-    public String addRiver(@RequestBody River river, @PathVariable String countryName) {
-        riverService.addRiver(river, countryService.getCountryByName(countryName));
-        return "river added";
+    @PostMapping("/river/add")
+    public ModelAndView addRiver(@ModelAttribute River river) {
+        riverService.addRiver(river);
+        return new ModelAndView("redirect:/infoPage");
+    }
+
+    @GetMapping("/addRiver")
+    public ModelAndView addRiver() {
+        return new ModelAndView("addRiverPage");
     }
 
     @GetMapping("/river/all")
@@ -87,10 +97,15 @@ public class CountryController {
 
 
 
-    @PostMapping("/sea/add/{countryName}")
-    public String addSea(@RequestBody Sea sea, @PathVariable String countryName) {
-        seaService.addSea(sea, countryService.getCountryByName(countryName));
-        return "sea added";
+    @PostMapping("/sea/add")
+    public ModelAndView addSea(@ModelAttribute Sea sea) {
+        seaService.addSea(sea);
+        return new ModelAndView("redirect:/infoPage");
+    }
+
+    @GetMapping("/addSea")
+    public ModelAndView addSea() {
+        return new ModelAndView("addSeaPage");
     }
 
     @GetMapping("/sea/all")

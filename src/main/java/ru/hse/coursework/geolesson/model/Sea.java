@@ -18,4 +18,5 @@ public class Sea {
     private double depth;
     private String resources;
     private String usedFor;
+    private String countries;
 }
