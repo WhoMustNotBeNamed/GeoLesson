@@ -8,17 +8,28 @@
     <!-- Подключение собственного CSS файла -->
     <base href="/">
     <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+    <link rel="image" type="text/css" href="/static/profile.jpg"/>
 </head>
 <body>
 <div th:replace="~{parts/navbar:: navbarFragment}"></div>
 
 <div class="container mt-5">
-    <h2 class="text-center">Профиль</h2>
-    <div class="card-body">
-        <p>Логин:</p>
-<!--        <div sec:authorize="isAuthenticated()">-->
-<!--            <span sec:authentication="${user.getName()}"></span></div></p>-->
-<!--        <p>Пароль: <span th:text="${user.getName()}"></span></p>-->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Профиль</h2>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <img src="profile.jpg" alt="Фото профиля" class="img-fluid rounded-circle" style="width: 200px; height: 200px;">
+                    </div>
+                    <div class="mb-3">
+                        <p class="text-center" style="font-size: 20px;">Логин: <span th:text="${#authentication.principal.username}"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
