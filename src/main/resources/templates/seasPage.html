@@ -20,23 +20,23 @@
     <div class="row mb-3">
         <hr>
         <div class="col">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='/countries/addRiver'">Добавить реку</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='/countries/addSea'">Добавить море</button>
         </div>
     </div>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div th:each="river : ${rivers}">
+        <div th:each="sea : ${seas}">
             <div class="col">
                 <div class="card mt-3">
                     <div class="card-header">
                         <svg xmlns="http://www.w3.org/2000/svg" th:utext="${var}" ></svg>
-                        <h2 th:text="${river.name}"></h2>
+                        <h2 th:text="${sea.name}"></h2>
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a th:href="@{/countries/river/{riverName}(mountainName=${river.name})}" class="btn btn-sm btn-outline-secondary">Посмотреть</a>
-                            <a th:href="@{/countries/updateRiver/{riverName}(riverName=${river.name})}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                            <a th:href="@{/countries/sea/{seaName}(seaName=${sea.name})}" class="btn btn-sm btn-outline-secondary">Посмотреть</a>
+                            <a th:href="@{/countries/updateSea/{seaName}(seaName=${sea.name})}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
                         </div>
                     </div>
                 </div>

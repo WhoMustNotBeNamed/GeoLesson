@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en, ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Подключение собственного CSS файла -->
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+</head>
+<body>
+<th:result th:replace="~{parts/navbar::navbarFragment}"></th:result>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Информация о море</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Название: <br><span th:text="${sea.name}"></span></li>
+                        <li class="list-group-item">Местоположение: <br><span th:text="${sea.location}"></span></li>
+                        <li class="list-group-item">Глубина: <br><span th:text="${sea.depth}"></span></li>
+                        <li class="list-group-item">Ресурсы: <br><span th:text="${sea.resources}"></span></li>
+                        <li class="list-group-item">Используется для: <br><span th:text="${sea.usedFor}"></span></li>
+                        <li class="list-group-item">Страны: <br><span th:text="${sea.countries}"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
