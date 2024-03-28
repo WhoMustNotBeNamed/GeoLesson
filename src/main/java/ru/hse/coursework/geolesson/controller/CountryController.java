@@ -48,6 +48,18 @@ public class CountryController {
         return new ModelAndView("countryPage");
     }
 
+    @PostMapping("/updateCountry")
+    public ModelAndView updateCountry(@ModelAttribute Country country) {
+        countryService.updateCountry(country);
+        return new ModelAndView("redirect:/infoPage");
+    }
+
+    @GetMapping("/updateInfo/{name}")
+    public ModelAndView updateCountryInfo(@PathVariable String name, Model model) {
+        model.addAttribute("country", countryService.getCountryByName(name));
+        return new ModelAndView("updateCountryPage");
+    }
+
 
 
 

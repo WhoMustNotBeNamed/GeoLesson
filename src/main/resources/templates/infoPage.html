@@ -43,7 +43,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <a th:href="@{/countries/country/{countryName}(countryName=${country.name})}" class="btn btn-sm btn-outline-secondary">Посмотреть</a>
-                            <a href="/mainPage" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                            <a th:href="@{/countries/updateInfo/{countryName}(countryName=${country.name})}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
                         </div>
                     </div>
                 </div>
