@@ -1,7 +1,5 @@
 <!doctype html>
-<html lang="en, ru" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en, ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,39 +10,81 @@
     <link rel="stylesheet" type="text/css" href="/static/style.css"/>
 </head>
 <body>
-<div th:replace="~{parts/navbar:: navbarFragment}"></div>
-
 <div class="container mt-5">
-    <h1>Справочные материалы о реках</h1>
-
-    <div class="row mb-3">
-        <hr>
-        <div class="col">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='/countries/addRiver'">Добавить реку</button>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-light-olive">
+                    <h5 class="text-center">Информация о горе</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">Высота: <br><span th:text="${mountain.height}"></span></li>
+                        <li class="list-group-item">Длина: <br><span th:text="${mountain.length}"></span></li>
+                        <li class="list-group-item">Самая высокая точка: <br><span th:text="${mountain.highestPoint}"></span></li>
+                        <li class="list-group-item">Климат: <br><span th:text="${mountain.climate}"></span></li>
+                        <li class="list-group-item">Ресурсы: <br><span th:text="${mountain.resources}"></span></li>
+                        <li class="list-group-item">Происхождение: <br><span th:text="${mountain.origin}"></span></li>
+                        <li class="list-group-item">Страны: <br><span th:text="${mountain.countries}"></span></li>
+                    </ul>
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-danger float-end" th:href="@{/countries/deleteMountain/{MountainName}(MountainName=${mountain.name})}">Удалить данные о горе</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div th:each="river : ${rivers}">
-            <div class="col">
-                <div class="card mt-3">
-                    <div class="card-header">
-                        <svg xmlns="http://www.w3.org/2000/svg" th:utext="${var}" ></svg>
-                        <h2 th:text="${river.name}"></h2>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a th:href="@{/countries/river/{riverName}(mountainName=${river.name})}" class="btn btn-sm btn-outline-secondary">Посмотреть</a>
-                            <a th:href="@{/countries/updateRiver/{riverName}(riverName=${river.name})}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+        <div class="col-md-6">
+            <!-- Колонка для формы ввода -->
+            <div class="card">
+                <div class="card-header bg-light-olive">
+                    <h5 class="text-center">Редактирование горы</h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/countries/mountain/updateMountain}" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Название горы:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="height" class="form-label">Высота:</label>
+                            <input type="number" class="form-control" id="height" name="height" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="length" class="form-label">Длина:</label>
+                            <input type="number" class="form-control" id="length" name="length" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="highestPoint" class="form-label">Самая высокая точка:</label>
+                            <input type="text" class="form-control" id="highestPoint" name="highestPoint" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="climate" class="form-label">Климат:</label>
+                            <input type="text" class="form-control" id="climate" name="climate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="resources" class="form-label">Ресурсы:</label>
+                            <input type="text" class="form-control" id="resources" name="resources" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="origin" class="form-label">Происхождение:</label>
+                            <input type="text" class="form-control" id="origin" name="origin" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="countries" class="form-label">Страны (через ", ")</label>
+                            <input type="text" class="form-control" id="countries" name="countries">
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary me-2" onclick="window.location.href='/infoPage'">Назад</button>
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
