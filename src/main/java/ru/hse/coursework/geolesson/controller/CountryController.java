@@ -60,7 +60,11 @@ public class CountryController {
         return new ModelAndView("updateCountryPage");
     }
 
-
+    @GetMapping("/deleteCountry/{name}")
+    public ModelAndView deleteCountry(@PathVariable String name) {
+        countryService.deleteCountryByName(name);
+        return new ModelAndView("redirect:/infoPage");
+    }
 
 
     @PostMapping("/mountain/add")

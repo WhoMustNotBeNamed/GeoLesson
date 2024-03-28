@@ -76,7 +76,8 @@ public class CountryServiceImpl implements CountryService {
         });
     }
 
-        @Override
+    @Override
+    @Transactional
     public void deleteCountryByName(String name) {
         if (countryRepository.getCountryByName(name).isEmpty()) {
             throw new IllegalArgumentException("Country does not exist");

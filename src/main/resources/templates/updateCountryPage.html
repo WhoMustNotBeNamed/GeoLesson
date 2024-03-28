@@ -49,6 +49,9 @@
                         <li class="list-group-item">Доля городского населения: <br><span th:text="${country.urbanPopulation}"></span></li>
                         <li class="list-group-item">Уровень грамотности: <br><span th:text="${country.literacyRate}"></span></li>
                     </ul>
+                    <div class="d-flex justify-content-between">
+                        <a class="btn btn-danger float-end" th:href="@{/countries/deleteCountry/{countryName}(countryName=${country.name})}">Удалить данные о стране</a>
+                    </div>
                 </div>
             </div>
         </div>
