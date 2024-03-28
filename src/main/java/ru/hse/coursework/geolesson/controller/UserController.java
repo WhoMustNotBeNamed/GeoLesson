@@ -18,10 +18,10 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/all")
-    public List<Account> getAllUsers() {
-        return userService.getAllUsers();
-    }
+//    @GetMapping("/all")
+//    public List<Account> getAllUsers() {
+//        return userService.getAllUsers();
+//    }
 
     @GetMapping("/login")
     public ModelAndView login(Model model) {

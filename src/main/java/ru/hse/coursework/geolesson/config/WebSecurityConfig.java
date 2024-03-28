@@ -26,10 +26,18 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity/*.csrf(AbstractHttpConfigurer::disable)*/
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/profilePage").hasAnyAuthority("ROLE_ADMIN")
-                                .requestMatchers("/", "/static/**", "/users/**", "/add", "/countries/**", "/countries/add", "/testInfo/**", "/infoPage/**").permitAll()
-                                .anyRequest().permitAll()
-
+                        .requestMatchers(
+                                "/countries/addInfo","/countries/addCountry", "/countries/deleteCountry/**","/countries/updateInfo/**",
+                                "/countries/addMountain","/countries/mountain/add","/countries/deleteMountain/**","/countries/updateMountain/**",
+                                "/countries/addRiver", "/countries/river/add","/countries/deleteRiver/**", "/countries/updateRiver/**",
+                                "/countries/addSea","/countries/sea/add", "/countries/deleteSea/**", "/countries/updateSea/**",
+                                "/testInfo/addTest", "/testInfo/add")
+                                .hasAnyAuthority("ROLE_ADMIN")
+                        .requestMatchers("/testPage", "/infoPage", "profilePage", "/countries/**", "/testInfo/**")
+                                .hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                        .requestMatchers("/", "/static/**", "/users/**", "/error")
+                                .permitAll()
+                        .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/users/login")
@@ -41,7 +49,6 @@ public class WebSecurityConfig {
                         .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);
-
         return httpSecurity.build();
     }
 
