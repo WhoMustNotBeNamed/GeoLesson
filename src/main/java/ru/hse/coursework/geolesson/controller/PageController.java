@@ -50,12 +50,6 @@ public class PageController {
         return new ModelAndView("profilePage");
     }
 
-//    @GetMapping(value = "/username")
-//    public String currentUserNameSimple() {
-//        Authentication authentication = authenticationFacade.getAuthentication();
-//        return authentication.getName();
-//    }
-
     @GetMapping("/error")
     public ModelAndView showErrorForm(String message) {
         ModelAndView model = new ModelAndView("error");

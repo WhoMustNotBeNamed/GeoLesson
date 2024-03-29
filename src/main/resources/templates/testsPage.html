@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en, ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="en, ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,9 +15,9 @@
 <div class="container mt-5">
     <h1>Тесты для проверки знаний</h1>
 
-    <div class="row mb-3">
+    <div class="row mb-3" sec:authorize="hasRole('ROLE_ADMIN')">
         <div class="col">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='/testInfo/addTest'">Добавить</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='/testInfo/addTest'">Добавить тест</button>
         </div>
     </div>
     <!-- Содержимое справочной страницы -->
@@ -37,7 +37,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <a th:href="@{/testInfo/test/{continent}(continent=${test.testContinent})}" class="btn btn-sm btn-outline-secondary">Пройти</a>
-                            <a th:href="@{/testInfo/updateTestInfo/{testName}(testName=${test.name})}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                            <a th:href="@{/testInfo/updateTestInfo/{testName}(testName=${test.name})}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-sm btn-outline-secondary">Редактировать</a>
                         </div>
                     </div>
                 </div>
