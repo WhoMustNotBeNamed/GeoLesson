@@ -3,7 +3,6 @@ package ru.hse.coursework.geolesson.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import ru.hse.coursework.geolesson.config.IAuthenticationFacade;
 import ru.hse.coursework.geolesson.service.CountryService;
+import ru.hse.coursework.geolesson.service.TestInfoService;
 import ru.hse.coursework.geolesson.service.UserService;
 
 @RestController
@@ -18,7 +18,7 @@ import ru.hse.coursework.geolesson.service.UserService;
 @AllArgsConstructor
 public class PageController {
     private final CountryService countryService;
-    private final TestInfoController testInfoController;
+    private final TestInfoService testInfoService;
     private final UserService userService;
 
     @Autowired
@@ -31,8 +31,8 @@ public class PageController {
 
     @GetMapping("/testPage")
     public ModelAndView testPage(Model model) {
-        model.addAttribute("testInfos", testInfoController.getAllTestInfos());
-        return new ModelAndView("testPage");
+        model.addAttribute("testInfos", testInfoService.getAllTestInfos());
+        return new ModelAndView("testsPage");
     }
 
     @GetMapping("/infoPage")
@@ -47,7 +47,7 @@ public class PageController {
     public ModelAndView profilePage(Model model) {
         Authentication authentication = authenticationFacade.getAuthentication();
         model.addAttribute("user", authentication);
-        return new ModelAndView("profile");
+        return new ModelAndView("profilePage");
     }
 
 //    @GetMapping(value = "/username")

@@ -1,5 +1,6 @@
 package ru.hse.coursework.geolesson.service;
 
+import ru.hse.coursework.geolesson.model.Country;
 import ru.hse.coursework.geolesson.model.TestInfo;
 
 import java.util.List;
@@ -11,6 +12,6 @@ public interface TestInfoService {
     TestInfo getTestInfoByName(String name);
 
     List<TestInfo> getAllTestInfos();
-
+    List<Country> getCorrectAnswers(List<Country> countries, List<String> answers);
     void deleteTestInfoByName(String name);
 }

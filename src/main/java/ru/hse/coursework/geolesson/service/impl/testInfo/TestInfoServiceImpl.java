@@ -2,10 +2,12 @@ package ru.hse.coursework.geolesson.service.impl.testInfo;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.hse.coursework.geolesson.model.Country;
 import ru.hse.coursework.geolesson.model.TestInfo;
 import ru.hse.coursework.geolesson.repository.TestInfoRepository;
 import ru.hse.coursework.geolesson.service.TestInfoService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,6 +32,19 @@ public class TestInfoServiceImpl implements TestInfoService {
     @Override
     public List<TestInfo> getAllTestInfos() {
         return testInfoRepository.findAll();
+    }
+
+    @Override
+    public List<Country> getCorrectAnswers(List<Country> countries, List<String> answers) {
+        List<Country> incorrectAnswers = new ArrayList<>();
+
+        for (Country country : countries) {
+            if (!answers.contains(country.getCapital()) && !answers.contains(country.getCapital().toLowerCase())) {
+                incorrectAnswers.add(country);
+            }
+        }
+
+        return incorrectAnswers;
     }
 
     @Override

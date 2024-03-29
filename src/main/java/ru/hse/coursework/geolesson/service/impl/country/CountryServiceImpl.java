@@ -36,6 +36,11 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
+    public List<Country> getCountriesByContinent(String continent) {
+        return countryRepository.getCountriesByContinent(continent);
+    }
+
+    @Override
     public void updateCountry(Country country) {
         if (country == null) {
             throw new IllegalArgumentException("Country cannot be null");
