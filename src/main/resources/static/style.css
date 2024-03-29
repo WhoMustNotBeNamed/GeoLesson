@@ -15,3 +15,7 @@
     font-size: 18px; /* Устанавливаем размер шрифта 18 пикселей */
     font-style: normal;
 }
+
+.navbar-nav .nav-item.with-padding {
+    padding-right: 10px; /* Задайте желаемый отступ здесь */
+}

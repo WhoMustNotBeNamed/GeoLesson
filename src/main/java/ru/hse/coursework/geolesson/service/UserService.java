@@ -13,4 +13,5 @@ public interface UserService {
     Account findUserById(UUID id);
     Account findUserByUsername(String username);
     List<Account> getAllUsers();
+    void updateRole(String username);
 }

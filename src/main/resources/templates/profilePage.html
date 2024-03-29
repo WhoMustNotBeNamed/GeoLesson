@@ -27,6 +27,20 @@
                     <div class="mb-3">
                         <p class="text-center" style="font-size: 20px;">Логин: <span th:text="${#authentication.principal.username}"></span></p>
                     </div>
+
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <hr>
+                        <h4 class="text">Все пользователи</h4>
+                        <div th:each="account : ${users}" class="mb-3">
+                            <p class="text" style="font-size: 15px;">Логин: <span th:text="${account.username}"></span></p>
+                            <p class="text" style="font-size: 15px;">Роль: <span th:text="${account.roles}"></span></p>
+
+                            <div class="d-flex justify-content-between">
+                                <a class="btn btn-primary" th:href="@{/users/updateRole/{username}(username=${account.username})}">Дать роль admin</a>
+                                <a class="btn btn-danger" th:href="@{/users/deleteUser/{username}(username=${account.username})}">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

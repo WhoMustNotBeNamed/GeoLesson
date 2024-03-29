@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public void deleteUserByUsername(String username) {
         if (userRepository.findUserByUsername(username).isEmpty()) {
             throw new IllegalArgumentException("User with this login does not exist");
@@ -56,5 +57,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<Account> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public void updateRole(String username) {
+        Account user = userRepository.findUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        user.setRoles("ROLE_ADMIN, ROLE_USER");
+        userRepository.save(user);
     }
 }

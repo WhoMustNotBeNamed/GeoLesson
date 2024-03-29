@@ -1,6 +1,6 @@
 <!-- navbar.html -->
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,20 +22,29 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Main</a>
-                    </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/testPage">Тесты</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/infoPage">Материалы</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/profilePage">Профиль</a>
-                    </li>
-                </ul>
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Main</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/testPage">Тесты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/infoPage">Материалы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profilePage">Профиль</a>
+                </li>
+                <li class="nav-item with-padding">
+                    <a sec:authorize="isAuthenticated()" class="nav-link" href="/users/logout">Выйти</a>
+                    <a sec:authorize="isAnonymous()" class="nav-link"  href="/users/login">Войти</a>
+                </li>
+            </ul>
+
+<!--            &lt;!&ndash; Кнопка Войти/Выйти &ndash;&gt;-->
+<!--            <ul class="navbar-nav me-2">-->
+
+<!--            </ul>-->
             </div>
         </div>
     </nav>

@@ -47,6 +47,7 @@ public class PageController {
     public ModelAndView profilePage(Model model) {
         Authentication authentication = authenticationFacade.getAuthentication();
         model.addAttribute("user", authentication);
+        model.addAttribute("users", userService.getAllUsers());
         return new ModelAndView("profilePage");
     }
 

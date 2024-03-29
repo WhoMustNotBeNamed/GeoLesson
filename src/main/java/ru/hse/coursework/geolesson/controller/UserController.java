@@ -29,6 +29,11 @@ public class UserController {
         return new ModelAndView("login");
     }
 
+    @GetMapping("/logout")
+    public ModelAndView logout() {
+        return new ModelAndView("redirect:/users/login");
+    }
+
     @PostMapping("/signUp")
     public ModelAndView addUser(@ModelAttribute Account user, Model model) {
         user.setRoles("ROLE_USER");
@@ -41,5 +46,17 @@ public class UserController {
     public ModelAndView showRegistrationForm(Model model) {
         model.addAttribute("user", new Account());
         return new ModelAndView("signUp");
+    }
+
+    @GetMapping("/updateRole/{name}")
+    public ModelAndView updateRole(@PathVariable String name, Model model) {
+        userService.updateRole(name);
+        return new ModelAndView("redirect:/profilePage");
+    }
+
+    @GetMapping("/deleteUser/{name}")
+    public ModelAndView deleteUser(@PathVariable String name, Model model) {
+        userService.deleteUserByUsername(name);
+        return new ModelAndView("redirect:/profilePage");
     }
 }
