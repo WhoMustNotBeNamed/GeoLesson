@@ -31,7 +31,8 @@ public class WebSecurityConfig {
                                 "/countries/addMountain","/countries/mountain/add","/countries/deleteMountain/**","/countries/updateMountain/**",
                                 "/countries/addRiver", "/countries/river/add","/countries/deleteRiver/**", "/countries/updateRiver/**",
                                 "/countries/addSea","/countries/sea/add", "/countries/deleteSea/**", "/countries/updateSea/**",
-                                "/testInfo/addTest", "/testInfo/add")
+                                "/testInfo/addTest", "/testInfo/add", "/testInfo/delete/**", "/testInfo/update/**",
+                                "/users/deleteUser/**", "/users/updateRole**")
                                 .hasAnyAuthority("ROLE_ADMIN")
                         .requestMatchers("/testPage", "/infoPage", "profilePage", "/countries/**", "/testInfo/**")
                                 .hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
