@@ -14,4 +14,6 @@ public interface TestInfoService {
     List<TestInfo> getAllTestInfos();
     List<Country> getCorrectAnswers(List<Country> countries, List<String> answers);
     void deleteTestInfoByName(String name);
+
+    void updateTestInfo(TestInfo testInfo);
 }

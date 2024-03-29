@@ -1,5 +1,6 @@
 package ru.hse.coursework.geolesson.service.impl.testInfo;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.hse.coursework.geolesson.model.Country;
@@ -48,11 +49,29 @@ public class TestInfoServiceImpl implements TestInfoService {
     }
 
     @Override
+    @Transactional
     public void deleteTestInfoByName(String name) {
         if (testInfoRepository.getTestInfoByName(name).isEmpty()) {
             throw new IllegalArgumentException("TestInfo does not exist");
         }
 
         testInfoRepository.deleteByName(name);
+    }
+
+    @Override
+    public void updateTestInfo(TestInfo testInfo) {
+        if (testInfo == null) {
+            throw new IllegalArgumentException("TestInfo cannot be null");
+        } else if (testInfoRepository.getTestInfoByName(testInfo.getName()).isEmpty()) {
+            throw new IllegalArgumentException("TestInfo does not exist");
+        }
+
+        testInfoRepository.getTestInfoByName(testInfo.getName()).ifPresent(t -> {
+            t.setDescription(testInfo.getDescription());
+            t.setNumberOfQuestions(testInfo.getNumberOfQuestions());
+            t.setComplexity(testInfo.getComplexity());
+            t.setTestContinent(testInfo.getTestContinent());
+            testInfoRepository.save(t);
+        });
     }
 }

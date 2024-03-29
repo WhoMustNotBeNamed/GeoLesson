@@ -16,4 +16,5 @@ public class TestInfo {
     private String description;
     private int numberOfQuestions;
     private int complexity;
+    private String testContinent;
 }

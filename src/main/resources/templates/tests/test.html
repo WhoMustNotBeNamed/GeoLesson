@@ -18,7 +18,7 @@
                     <h5 class="text-center" th:text="'Тест на знание столиц континента ' + ${countries[0].continent}"> </h5>
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/testInfo/checkAnswers}" method="post">
+                    <form th:action="@{'/testInfo/checkAnswers/' + ${countries[0].continent}}" method="post">
                         <div th:each="country, iterStat : ${countries}">
                             <div class="mb-3">
                                 <label th:text="${iterStat.index + 1} + '. Столица страны &quot;' + ${country.name} + '&quot;'"></label>

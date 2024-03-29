@@ -42,18 +42,35 @@ public class TestInfoController {
         return new ModelAndView("tests/addTestPage");
     }
 
+    @PostMapping("/updateTest")
+    public ModelAndView updateTest(@ModelAttribute TestInfo testInfo) {
+        testInfoService.updateTestInfo(testInfo);
+        return new ModelAndView("redirect:/testPage");
+    }
 
-    @GetMapping("/test")
-    public ModelAndView showTestPage(Model model) {
+    @GetMapping("/updateTestInfo/{name}")
+    public ModelAndView updateTestInfo(@PathVariable String name, Model model) {
+        model.addAttribute("testInfo", testInfoService.getTestInfoByName(name));
+        return new ModelAndView("tests/updateTestInfo");
+    }
+
+    @GetMapping("/deleteTest/{name}")
+    public ModelAndView deleteTest(@PathVariable String name) {
+        testInfoService.deleteTestInfoByName(name);
+        return new ModelAndView("redirect:/testPage");
+    }
+
+    @GetMapping("/test/{continent}")
+    public ModelAndView showTestPage(@PathVariable String continent,Model model) {
         // Все страны, чей континент Европа
-        List<Country> countries = countryService.getCountriesByContinent("Европа");
+        List<Country> countries = countryService.getCountriesByContinent(continent);
         model.addAttribute("countries", countries);
         return new ModelAndView("tests/test");
     }
 
-    @PostMapping("/checkAnswers")
-    public ModelAndView checkAnswers(@RequestParam("answers") List<String> answers, Model model) {
-        List<Country> countries = countryService.getCountriesByContinent("Европа");
+    @PostMapping("/checkAnswers/{continent}")
+    public ModelAndView checkAnswers(@PathVariable String continent, @RequestParam("answers") List<String> answers, Model model) {
+        List<Country> countries = countryService.getCountriesByContinent(continent);
         List<Country> incorrectAnswers = testInfoService.getCorrectAnswers(countries, answers);
         model.addAttribute("countries", countries);
         model.addAttribute("correctAnswersList", incorrectAnswers);
