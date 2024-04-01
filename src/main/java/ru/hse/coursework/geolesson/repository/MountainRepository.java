@@ -9,8 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface MountainRepository extends JpaRepository<Mountain, UUID> {
-    boolean existsByName(String name);
-
     Optional<Mountain> getMountainByName(String name);
 
     void deleteByName(String name);

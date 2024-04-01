@@ -9,8 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface RiverRepository extends JpaRepository<River, UUID> {
-    boolean existsByName(String name);
-
     Optional<River> getRiverByName(String name);
 
     void deleteByName(String name);

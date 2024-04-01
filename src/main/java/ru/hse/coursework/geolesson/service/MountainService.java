@@ -9,7 +9,6 @@ public interface MountainService {
     void addMountain(Mountain mountain);
     Mountain getMountainByName(String name);
     List<Mountain> getAllMountains();
-
     void updateMountain(Mountain mountain);
     void deleteMountainByName(String name);
 }

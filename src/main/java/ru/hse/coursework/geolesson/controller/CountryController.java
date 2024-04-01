@@ -21,7 +21,7 @@ public class CountryController {
 
     @GetMapping("/addInfo")
     public ModelAndView addCountryInfo() {
-        return new ModelAndView("country/addCountryPage");
+        return new ModelAndView("AddCountryPage");
     }
 
     @GetMapping("/country/{name}")

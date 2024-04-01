@@ -22,7 +22,4 @@ public class Mountain {
     private String resources;
     private String origin;
     private String countries;
-
-//    @ManyToMany(mappedBy = "mountains")
-//    private List<Country> countries;
 }

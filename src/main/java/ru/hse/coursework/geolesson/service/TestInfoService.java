@@ -8,12 +8,9 @@ import java.util.UUID;
 
 public interface TestInfoService {
     void addTestInfo(TestInfo testInfo);
-
     TestInfo getTestInfoByName(String name);
-
     List<TestInfo> getAllTestInfos();
     List<Country> getCorrectAnswers(List<Country> countries, List<String> answers);
     void deleteTestInfoByName(String name);
-
     void updateTestInfo(TestInfo testInfo);
 }

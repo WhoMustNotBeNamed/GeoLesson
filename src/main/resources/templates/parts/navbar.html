@@ -35,16 +35,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/profilePage">Профиль</a>
                 </li>
-                <li class="nav-item with-padding">
-                    <a sec:authorize="isAuthenticated()" class="nav-link" href="/users/logout">Выйти</a>
-                    <a sec:authorize="isAnonymous()" class="nav-link"  href="/users/login">Войти</a>
-                </li>
+
+<!--                <li class="nav-item">-->
+<!--                    <form sec:authorize="isAuthenticated()" class="nav-link" method="post" th:action="@{/logout}">-->
+<!--                        <input type="submit" value="Выйти" class="nav-link">-->
+<!--                    </form>-->
+<!--                    <a sec:authorize="isAnonymous()" class="nav-link"  href="/users/login">Войти</a>-->
+<!--                </li>-->
             </ul>
 
-<!--            &lt;!&ndash; Кнопка Войти/Выйти &ndash;&gt;-->
-<!--            <ul class="navbar-nav me-2">-->
-
-<!--            </ul>-->
+            <ul class="navbar-nav">
+                <li class="nav-item with-padding">
+                    <a sec:authorize="isAnonymous()" class="nav-link"  href="/users/login">Войти</a>
+                </li>
+                <li class="nav-item with-padding">
+                    <form sec:authorize="isAuthenticated()" method="post" th:action="@{/logout}">
+                        <input type="submit" value="Выйти" class="btn btn-link nav-link">
+                    </form>
+                </li>
+            </ul>
             </div>
         </div>
     </nav>
