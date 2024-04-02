@@ -1,0 +1,62 @@
+<!-- navbar.html -->
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Подключение собственного CSS файла -->
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
+</head>
+<body>
+<!-- Навигационная панель -->
+<div th:fragment="navbarFragment">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light-olive">
+        <div class="container">
+            <a class="navbar-brand" href="/mainPage">GeoLesson</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Main</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/testPage">Тесты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/infoPage">Материалы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profilePage">Профиль</a>
+                </li>
+
+<!--                <li class="nav-item">-->
+<!--                    <form sec:authorize="isAuthenticated()" class="nav-link" method="post" th:action="@{/logout}">-->
+<!--                        <input type="submit" value="Выйти" class="nav-link">-->
+<!--                    </form>-->
+<!--                    <a sec:authorize="isAnonymous()" class="nav-link"  href="/users/login">Войти</a>-->
+<!--                </li>-->
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item with-padding">
+                    <a sec:authorize="isAnonymous()" class="nav-link"  href="/users/login">Войти</a>
+                </li>
+                <li class="nav-item with-padding">
+                    <form sec:authorize="isAuthenticated()" method="post" th:action="@{/logout}">
+                        <input type="submit" value="Выйти" class="btn btn-link nav-link">
+                    </form>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

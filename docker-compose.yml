@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=geolesson_user
+      - POSTGRES_PASSWORD=geolesson_user
+      - POSTGRES_DB=geolesson
+  app:
+    build:
+      context: .
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db

@@ -1,0 +1,21 @@
+.bg-light-olive {
+    background-color: rgba(146, 196, 115, .85);
+}
+
+.navbar-nav .nav-link {
+    font-size: 20px; /* Устанавливаем размер шрифта 18 пикселей */
+}
+
+.list-group-item {
+    font-size: 20px; /* Устанавливаем размер шрифта 18 пикселей */
+    font-style: italic; /* Устанавливаем курсивное начертание */
+}
+
+.span {
+    font-size: 18px; /* Устанавливаем размер шрифта 18 пикселей */
+    font-style: normal;
+}
+
+.navbar-nav .nav-item.with-padding {
+    padding-right: 10px; /* Задайте желаемый отступ здесь */
+}
