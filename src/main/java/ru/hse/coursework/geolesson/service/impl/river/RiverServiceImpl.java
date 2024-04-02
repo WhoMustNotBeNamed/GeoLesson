@@ -17,6 +17,7 @@ public class RiverServiceImpl implements RiverService {
     private RiverRepository riverRepository;
     private CountryService countryService;
 
+    // Метод для добавления реки
     @Override
     public void addRiver(River river) {
         if (river == null) {
@@ -36,6 +37,7 @@ public class RiverServiceImpl implements RiverService {
         riverRepository.save(river);
     }
 
+    // Метод для обновления информации о реке
     @Override
     public void updateRiver(River river) {
         if (river == null) {
@@ -55,16 +57,19 @@ public class RiverServiceImpl implements RiverService {
         });
     }
 
+    // Метод для получения реки по имени
     @Override
     public River getRiverByName(String name) {
         return riverRepository.getRiverByName(name).orElse(null);
     }
 
+    // Метод для получения всех рек
     @Override
     public List<River> getAllRivers() {
         return riverRepository.findAll();
     }
 
+    // Метод для удаления реки по имени
     @Override
     @Transactional
     public void deleteRiverByName(String name) {
@@ -77,3 +82,4 @@ public class RiverServiceImpl implements RiverService {
         riverRepository.deleteByName(name);
     }
 }
+

@@ -18,12 +18,16 @@ public class Account implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @Getter
     @Column(unique = true)
     private String username;
+
     private String password;
+
     private String roles;
 
+    // Метод для получения ролей пользователя
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.stream(roles.split(", "))
@@ -31,6 +35,7 @@ public class Account implements UserDetails {
                 .collect(Collectors.toList());
     }
 
+    // Методы для проверки статуса аккаунта, не истек ли срок его действия и не заблокирован ли
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -41,13 +46,16 @@ public class Account implements UserDetails {
         return true;
     }
 
+    // Метод для проверки статуса учетных данных, не истек ли срок действия учетных данных
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    // Метод для проверки активности учетной записи
     @Override
     public boolean isEnabled() {
         return true;
     }
 }
+

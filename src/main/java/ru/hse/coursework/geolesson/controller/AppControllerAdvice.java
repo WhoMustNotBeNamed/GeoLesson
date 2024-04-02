@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class AppControllerAdvice {
+    // Обработка всех исключений
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ModelAndView handleAllExceptions(Exception ex) {
