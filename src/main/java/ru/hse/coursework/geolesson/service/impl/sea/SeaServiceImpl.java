@@ -17,6 +17,7 @@ public class SeaServiceImpl implements SeaService {
     private SeaRepository seaRepository;
     private CountryService countryService;
 
+    // Метод для добавления моря
     @Override
     public void addSea(Sea sea) {
         if (sea == null) {
@@ -36,6 +37,7 @@ public class SeaServiceImpl implements SeaService {
         seaRepository.save(sea);
     }
 
+    // Метод для обновления информации о море
     @Override
     public void updateSea(Sea sea) {
         if (sea == null) {
@@ -54,16 +56,19 @@ public class SeaServiceImpl implements SeaService {
         });
     }
 
+    // Метод для получения моря по имени
     @Override
     public Sea getSeaByName(String name) {
         return seaRepository.getSeaByName(name).orElse(null);
     }
 
+    // Метод для получения всех морей
     @Override
     public List<Sea> getAllSeas() {
         return seaRepository.findAll();
     }
 
+    // Метод для удаления моря по имени
     @Override
     @Transactional
     public void deleteSeaByName(String name) {
@@ -76,3 +81,4 @@ public class SeaServiceImpl implements SeaService {
         seaRepository.deleteByName(name);
     }
 }
+

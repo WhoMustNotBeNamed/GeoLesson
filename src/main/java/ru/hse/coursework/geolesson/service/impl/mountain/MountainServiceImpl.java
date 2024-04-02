@@ -16,6 +16,8 @@ import java.util.List;
 class MountainServiceImpl implements MountainService {
     private MountainRepository mountainRepository;
     private CountryService countryService;
+
+    // Метод для добавления горы
     @Override
     public void addMountain(Mountain mountain) {
         if (mountain == null) {
@@ -37,6 +39,7 @@ class MountainServiceImpl implements MountainService {
         mountainRepository.save(mountain);
     }
 
+    // Метод для обновления информации о горе
     @Override
     public void updateMountain(Mountain mountain) {
         if (mountain == null) {
@@ -57,17 +60,19 @@ class MountainServiceImpl implements MountainService {
         });
     }
 
-
+    // Метод для получения горы по имени
     @Override
     public Mountain getMountainByName(String name) {
         return mountainRepository.getMountainByName(name).orElse(null);
     }
 
+    // Метод для получения всех гор
     @Override
     public List<Mountain> getAllMountains() {
         return mountainRepository.findAll();
     }
 
+    // Метод для удаления горы по имени
     @Override
     @Transactional
     public void deleteMountainByName(String name) {
@@ -79,3 +84,4 @@ class MountainServiceImpl implements MountainService {
         mountainRepository.deleteByName(name);
     }
 }
+

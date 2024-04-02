@@ -15,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class TestInfoServiceImpl implements TestInfoService {
     private TestInfoRepository testInfoRepository;
+
+    // Метод для добавления информации о тесте
     @Override
     public void addTestInfo(TestInfo testInfo) {
         if (testInfo == null) {
@@ -25,16 +27,19 @@ public class TestInfoServiceImpl implements TestInfoService {
         testInfoRepository.save(testInfo);
     }
 
+    // Метод для получения информации о тесте по имени
     @Override
     public TestInfo getTestInfoByName(String name) {
         return testInfoRepository.getTestInfoByName(name).orElse(null);
     }
 
+    // Метод для получения всех информаций о тестах
     @Override
     public List<TestInfo> getAllTestInfos() {
         return testInfoRepository.findAll();
     }
 
+    // Метод для проверки правильных ответов в тесте
     @Override
     public List<Country> getCorrectAnswers(List<Country> countries, List<String> answers) {
         List<Country> incorrectAnswers = new ArrayList<>();
@@ -48,6 +53,7 @@ public class TestInfoServiceImpl implements TestInfoService {
         return incorrectAnswers;
     }
 
+    // Метод для удаления информации о тесте по имени
     @Override
     @Transactional
     public void deleteTestInfoByName(String name) {
@@ -58,6 +64,7 @@ public class TestInfoServiceImpl implements TestInfoService {
         testInfoRepository.deleteByName(name);
     }
 
+    // Метод для обновления информации о тесте
     @Override
     public void updateTestInfo(TestInfo testInfo) {
         if (testInfo == null) {
@@ -75,3 +82,4 @@ public class TestInfoServiceImpl implements TestInfoService {
         });
     }
 }
+

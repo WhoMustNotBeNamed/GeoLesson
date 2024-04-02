@@ -8,8 +8,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,22 +20,22 @@ import ru.hse.coursework.geolesson.service.impl.user.NewUserDetailsService;
 @EnableMethodSecurity
 @Slf4j
 public class WebSecurityConfig {
+    // Конфигурация цепочки фильтров безопасности
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity/*.csrf(AbstractHttpConfigurer::disable)*/
-                .authorizeHttpRequests(auth -> auth
+        httpSecurity.authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/countries/addInfo","/countries/addCountry", "/countries/deleteCountry/**","/countries/updateInfo/**",
-                                "/countries/addMountain","/countries/mountain/add","/countries/deleteMountain/**","/countries/updateMountain/**",
-                                "/countries/addRiver", "/countries/river/add","/countries/deleteRiver/**", "/countries/updateRiver/**",
-                                "/countries/addSea","/countries/sea/add", "/countries/deleteSea/**", "/countries/updateSea/**",
+                                "/countries/addInfo", "/countries/addCountry", "/countries/deleteCountry/**", "/countries/updateInfo/**",
+                                "/countries/addMountain", "/countries/mountain/add", "/countries/deleteMountain/**", "/countries/updateMountain/**",
+                                "/countries/addRiver", "/countries/river/add", "/countries/deleteRiver/**", "/countries/updateRiver/**",
+                                "/countries/addSea", "/countries/sea/add", "/countries/deleteSea/**", "/countries/updateSea/**",
                                 "/testInfo/addTest", "/testInfo/add", "/testInfo/delete/**", "/testInfo/update/**",
                                 "/users/deleteUser/**", "/users/updateRole**")
-                                .hasAnyAuthority("ROLE_ADMIN")
+                        .hasAnyAuthority("ROLE_ADMIN")
                         .requestMatchers("/testPage", "/infoPage", "profilePage", "/countries/**", "/testInfo/**")
-                                .hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                        .hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                         .requestMatchers("/", "/static/**", "/users/**", "/error")
-                                .permitAll()
+                        .permitAll()
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
@@ -53,11 +51,13 @@ public class WebSecurityConfig {
         return httpSecurity.build();
     }
 
+    // Пользовательский сервис детализации пользователей
     @Bean
     public UserDetailsService userDetailsService() {
         return new NewUserDetailsService();
     }
 
+    // Провайдер аутентификации
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -66,6 +66,7 @@ public class WebSecurityConfig {
         return provider;
     }
 
+    // Кодировщик пароля
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

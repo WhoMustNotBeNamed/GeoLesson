@@ -13,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CountryServiceImpl implements CountryService {
     private CountryRepository countryRepository;
+
+    // Метод для добавления страны
     @Override
     @Transactional
     public void addCountry(Country country) {
@@ -25,21 +27,25 @@ public class CountryServiceImpl implements CountryService {
         countryRepository.save(country);
     }
 
+    // Метод для получения страны по имени
     @Override
     public Country getCountryByName(String name) {
         return countryRepository.getCountryByName(name).orElse(null);
     }
 
+    // Метод для получения всех стран
     @Override
     public List<Country> getAllCountries() {
         return countryRepository.findAll();
     }
 
+    // Метод для получения стран по континенту
     @Override
     public List<Country> getCountriesByContinent(String continent) {
         return countryRepository.getCountriesByContinent(continent);
     }
 
+    // Метод для обновления информации о стране
     @Override
     public void updateCountry(Country country) {
         if (country == null) {
@@ -81,6 +87,7 @@ public class CountryServiceImpl implements CountryService {
         });
     }
 
+    // Метод для удаления страны по имени
     @Override
     @Transactional
     public void deleteCountryByName(String name) {
