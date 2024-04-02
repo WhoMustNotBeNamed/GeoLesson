@@ -17,9 +17,9 @@
 <div class="container mt-5">
     <h1>Справочные материалы о реках</h1>
 
-    <div class="row mb-3">
+    <div class="row mb-3" sec:authorize="hasRole('ROLE_ADMIN')">
         <hr>
-        <div class="col">
+        <div class="col" >
             <button type="button" class="btn btn-primary" onclick="window.location.href='/countries/addRiver'">Добавить реку</button>
         </div>
     </div>
@@ -36,7 +36,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <a th:href="@{/countries/river/{riverName}(riverName=${river.name})}" class="btn btn-sm btn-outline-secondary">Посмотреть</a>
-                            <a th:href="@{/countries/updateRiver/{riverName}(riverName=${river.name})}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/countries/updateRiver/{riverName}(riverName=${river.name})}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
                         </div>
                     </div>
                 </div>
